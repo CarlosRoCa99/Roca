@@ -96,14 +96,31 @@ void linealSearch(int *array){
 }
 
 void binarySearch(int *array){
-	int choice,i,range;
-	range = lenght;
+	int choice,inf,sup,half;
 	bool found = false;
 	printf("\n\n\nPara relizar la busqueda por bloques se ha re-ordenado el arreglo de la siguiente forma:");
 	bubbleSort(array);
 	printf("\n\n\nIngrese el numero a buscar: ");
 	fflush(stdin);
 	scanf("%d",&choice);
+	inf = 0;
+	sup = lenght;
+	while(inf<=sup){
+		half = (inf+sup)/2;
+		if(array[half] == choice){
+			found = true;
+			break;
+		}else if(array[half]>choice){
+			sup = half;
+		}else{
+			inf = half;
+		}
+	}
+	if(found){
+		printf("\n\n\nEl numero %d se encuentra en la posicion %d",choice,half);
+	}else{
+		printf("\n\n\nNo se encontro el numero");
+	}
 }
 
 void main(){
@@ -138,6 +155,8 @@ void main(){
 		case 6:
 			binarySearch(array);
 			break;
+		default:
+			printf("\n\nEleccion erronea");
 	}
 	
 	printf("\n\n\n\n");
